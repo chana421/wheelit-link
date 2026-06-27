@@ -1,21 +1,176 @@
 <!DOCTYPE html>
-<html>
+<html dir="rtl" lang="he">
 <head>
-  <meta charset="UTF-8">
-  <title>Wheel It</title>
-  <script>
-    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
-    if (/android/i.test(userAgent)) {
-      window.location.href = "https://play.google.com/store/apps/details?id=com.chana.wheelit";
-    } else if (/iPhone|iPad|iPod/.test(userAgent)) {
-      window.location.href = "https://apps.apple.com/il/app/wheel-it/id6759671018?l=he";
-    } else {
-      window.location.href = "https://play.google.com/store/apps/details?id=com.chana.wheelit";
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wheel It – הצטרפות</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(150deg, #1B3A4B 0%, #274C69 55%, #1a2e3e 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
     }
-  </script>
+    .card {
+      background: #fff;
+      border-radius: 28px;
+      padding: 40px 32px 36px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 24px 70px rgba(0,0,0,0.4);
+    }
+    .icon { font-size: 68px; display: block; margin-bottom: 10px; }
+    h1  { color: #1B3A4B; font-size: 30px; font-weight: 900; margin-bottom: 8px; }
+    .sub { color: #6C7E8D; font-size: 15px; line-height: 1.55; margin-bottom: 26px; }
+    .code-row {
+      background: #F0F5F8;
+      border-radius: 14px;
+      padding: 12px 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .code-lbl { color: #6C7E8D; font-size: 13px; }
+    .code-val { color: #D4A949; font-size: 22px; font-weight: 900; letter-spacing: 3px; }
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 18px;
+      padding: 15px 20px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      color: #fff;
+      margin-bottom: 12px;
+      transition: opacity .18s;
+    }
+    .btn:hover { opacity: .86; }
+    .btn-android { background: #34A853; }
+    .btn-ios     { background: #1B3A4B; }
+    .btn-open    { background: #274C69; }
+    .divider { color: #c0c8cf; font-size: 12px; margin: 4px 0 14px; }
+    .status { color: #9EA8B3; font-size: 12px; margin-top: 14px; min-height: 18px; }
+    .hidden { display: none !important; }
+    svg { flex-shrink: 0; }
+  </style>
 </head>
 <body>
-  <p>מעבירים אותך לאפליקציה...</p>
+<div class="card">
+  <span class="icon">🚗</span>
+  <h1>Wheel It</h1>
+  <p class="sub">
+    חבר/ה הזמין/ה אותך!<br/>
+    הצטרפ/י ותקבל/י כרטיס להגרלת פרס 🏆
+  </p>
+
+  <div class="code-row" id="code-row" style="display:none">
+    <span class="code-lbl">קוד:</span>
+    <span class="code-val" id="code-val"></span>
+  </div>
+
+  <!-- Android button -->
+  <a class="btn btn-android hidden" id="btn-android" href="#">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+      <path d="M3.18 23.76c.3.17.64.24.99.19l11.54-11.54L12 8.69 3.18 23.76z"/>
+      <path d="M20.07 10.01L17.1 8.34l-3.33 3.08 3.33 3.35 3-1.7c.85-.49.85-2.57-.03-3.06z"/>
+      <path d="M2.19.32C1.88.52 1.67.87 1.67 1.33v21.33c0 .46.21.81.52 1.01L14.54 12 2.19.32z"/>
+      <path d="M15.71 6.94L3.18.24C2.84.07 2.48.1 2.19.32L15.06 13.2l.65-.65V6.94z"/>
+    </svg>
+    הורד/י מ-Google Play
+  </a>
+
+  <!-- iOS button -->
+  <a class="btn btn-ios hidden" id="btn-ios" href="#">
+    <svg width="20" height="22" viewBox="0 0 814 1000" fill="white">
+      <path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-57.8-155.5-127.4C46 449.8 32 347.1 32 255.6c0-176.5 114.7-269.7 227.7-269.7 59.7 0 109.5 38.2 146.8 38.2 35.7 0 91.5-40.8 158.7-40.8 25 0 108.2 2.5 170.7 76.6zm-325.7-72.3c18.3-23.8 31-57.6 31-91.3 0-4.5-.5-9.1-1.3-13.5-29.5 1.1-64.5 19.6-85.7 44.9-16.2 18.9-31 52.5-31 86.5 0 5 .7 9.9 1.3 11.4 1.9.3 5.1.6 8.2.6 26.5 0 57.1-17.7 77.5-38.6z"/>
+    </svg>
+    הורד/י מ-App Store
+  </a>
+
+  <!-- If app already installed: open directly -->
+  <div class="divider" id="divider-open" style="display:none">— כבר מותקן? —</div>
+  <a class="btn btn-open hidden" id="btn-open" href="#">פתח/י את Wheel It</a>
+
+  <p class="status" id="status"></p>
+</div>
+
+<script>
+  // ─── Extract referral code from ?ref=CODE or path /ref/CODE ──────────────
+  const qsRef = new URLSearchParams(window.location.search).get('ref');
+  const pathParts = window.location.pathname.split('/').filter(Boolean);
+  // path could be ["wheelit-link", "ref", "CODE"] on GitHub Pages
+  const refIdx = pathParts.indexOf('ref');
+  const pathRef = (refIdx >= 0 && pathParts.length > refIdx + 1)
+                ? pathParts[refIdx + 1]
+                : '';
+  const code = (qsRef || pathRef || '').trim().toUpperCase();
+
+  if (code) {
+    document.getElementById('code-row').style.display = 'inline-flex';
+    document.getElementById('code-val').textContent = code;
+  }
+
+  // ─── Detect platform ─────────────────────────────────────────────────────
+  const ua = navigator.userAgent || '';
+  const isIOS     = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  const isAndroid = /Android/.test(ua);
+
+  const appUri     = 'wheelit://ref/' + code;
+  // Android: Play Store with install referrer so the app auto-detects after install
+  const androidUrl = 'https://play.google.com/store/apps/details?id=com.chana.wheelit'
+                   + (code ? '&referrer=ref%3D' + encodeURIComponent(code) : '');
+  // iOS: replace APPSTORE_ID with your numeric App Store ID
+  const iosUrl     = 'https://apps.apple.com/app/id' + 'APPSTORE_ID';
+
+  const btnAndroid = document.getElementById('btn-android');
+  const btnIos     = document.getElementById('btn-ios');
+  const btnOpen    = document.getElementById('btn-open');
+  const dividerOpen= document.getElementById('divider-open');
+  const status     = document.getElementById('status');
+
+  btnAndroid.href = androidUrl;
+  btnIos.href     = iosUrl;
+  btnOpen.href    = appUri;
+
+  if (isAndroid) {
+    btnAndroid.classList.remove('hidden');
+    dividerOpen.style.display = '';
+    btnOpen.classList.remove('hidden');
+  } else if (isIOS) {
+    btnIos.classList.remove('hidden');
+    dividerOpen.style.display = '';
+    btnOpen.classList.remove('hidden');
+  } else {
+    // Desktop / unknown – show both
+    btnAndroid.classList.remove('hidden');
+    btnIos.classList.remove('hidden');
+  }
+
+  // ─── Auto-try to open app if already installed ───────────────────────────
+  let hidden = false;
+  document.addEventListener('visibilitychange', () => { hidden = document.hidden; });
+
+  function tryOpenApp() {
+    if (!code) return;
+    status.textContent = 'מנסה לפתוח את האפלקציה...';
+    window.location.href = appUri;
+    setTimeout(() => {
+      if (!hidden) status.textContent = '';
+    }, 2000);
+  }
+
+  window.addEventListener('load', () => setTimeout(tryOpenApp, 700));
+</script>
 </body>
 </html>
